@@ -34,4 +34,22 @@ with open("ex4_sequences.fa") as fasta_file:
         # seq is a FastaSequence object
         gene = Gene(seq.id, seq.description, seq.sequence_as_string())
         genes.append(gene)
-makePWM(genes)
+seq_len = len(genes[0].seq)
+gene_matrix = np.chararray((len(genes), seq_len),unicode=True)
+for i in range(len(genes)):
+    gene_matrix[i,:] = genes[i].seq
+
+i = 0
+target_len = 19
+prob_matrix = np.zeros((target_len,4), dtype=np.float)
+while i < seq_len-target_len:
+    for j in range(target_len):
+        prob_matrix[i][0] = None
+        a = np.where(gene_matrix[:,i+j], 'A')
+        print(a)
+        exit()
+
+
+
+print(gene_matrix)
+#makePWM(genes)
